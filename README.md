@@ -45,7 +45,7 @@
 
 <!-- YOUTUBE:LATEST -->
 <p align="center">
-  <a href="https://www.youtube.com/@melv1l">
+  <a href="https://www.youtube.com/watch?v=PX5pezQ_0Js">
     <picture>
       <source media="(prefers-color-scheme: dark)" srcset="assets/youtube-latest-dark.svg"/>
       <source media="(prefers-color-scheme: light)" srcset="assets/youtube-latest-light.svg"/>
@@ -55,7 +55,11 @@
 </p>
 
 <!-- YOUTUBE:START -->
-<p align="center"><sub>Recent videos show up here automatically.</sub></p>
+<p align="center">
+  <a href="https://www.youtube.com/watch?v=PX5pezQ_0Js" title="Entièrement personnaliser sa Switch est devenu bien trop simple (NXTheme Installer)"><img src="https://i.ytimg.com/vi/PX5pezQ_0Js/mqdefault.jpg" width="260" alt="Entièrement personnaliser sa Switch est devenu bien trop simple (NXTheme Installer)"/></a>
+  <a href="https://www.youtube.com/watch?v=Pjuv0L2So5U" title="L&#x27;émulation sur Switch a franchi un ENORME cap (Tico)"><img src="https://i.ytimg.com/vi/Pjuv0L2So5U/mqdefault.jpg" width="260" alt="L&#x27;émulation sur Switch a franchi un ENORME cap (Tico)"/></a>
+  <a href="https://www.youtube.com/watch?v=LadycwH8rds" title="Comment installer N&#x27;IMPORTE QUEL JEU sur Switch en 2026!"><img src="https://i.ytimg.com/vi/LadycwH8rds/mqdefault.jpg" width="260" alt="Comment installer N&#x27;IMPORTE QUEL JEU sur Switch en 2026!"/></a>
+</p>
 <!-- YOUTUBE:END -->
 
 <br/>
