@@ -33,9 +33,9 @@
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=pr,ae,ai,ps,blender&theme=dark"/>
-    <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=pr,ae,ai,ps,blender&theme=light"/>
-    <img src="https://skillicons.dev/icons?i=pr,ae,ai,ps,blender&theme=light" alt="Premiere Pro, After Effects, Illustrator, Photoshop, Blender"/>
+    <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=pr%2Cae%2Cai%2Cps%2Cblender&theme=dark"/>
+    <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=pr%2Cae%2Cai%2Cps%2Cblender&theme=light"/>
+    <img src="https://skillicons.dev/icons?i=pr%2Cae%2Cai%2Cps%2Cblender&theme=light" alt="Premiere Pro, After Effects, Illustrator, Photoshop, Blender"/>
   </picture>
 </p>
 
@@ -47,37 +47,49 @@
 <p align="center">
   <a href="https://www.youtube.com/watch?v=PX5pezQ_0Js">
     <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="assets/youtube-latest-dark.svg"/>
-      <source media="(prefers-color-scheme: light)" srcset="assets/youtube-latest-light.svg"/>
-      <img src="assets/youtube-latest-light.svg" width="100%" alt="Latest YouTube upload"/>
+      <source media="(prefers-color-scheme: dark)" srcset="assets/youtube-latest-dark.svg?v=PX5pezQ_0Js"/>
+      <source media="(prefers-color-scheme: light)" srcset="assets/youtube-latest-light.svg?v=PX5pezQ_0Js"/>
+      <img src="assets/youtube-latest-light.svg?v=PX5pezQ_0Js" width="100%" alt="Latest YouTube upload"/>
     </picture>
   </a>
 </p>
 
-<!-- YOUTUBE:START -->
 <p align="center">
-  <a href="https://www.youtube.com/watch?v=PX5pezQ_0Js" title="Entièrement personnaliser sa Switch est devenu bien trop simple (NXTheme Installer)"><img src="https://i.ytimg.com/vi/PX5pezQ_0Js/mqdefault.jpg" width="260" alt="Entièrement personnaliser sa Switch est devenu bien trop simple (NXTheme Installer)"/></a>
-  <a href="https://www.youtube.com/watch?v=Pjuv0L2So5U" title="L&#x27;émulation sur Switch a franchi un ENORME cap (Tico)"><img src="https://i.ytimg.com/vi/Pjuv0L2So5U/mqdefault.jpg" width="260" alt="L&#x27;émulation sur Switch a franchi un ENORME cap (Tico)"/></a>
-  <a href="https://www.youtube.com/watch?v=LadycwH8rds" title="Comment installer N&#x27;IMPORTE QUEL JEU sur Switch en 2026!"><img src="https://i.ytimg.com/vi/LadycwH8rds/mqdefault.jpg" width="260" alt="Comment installer N&#x27;IMPORTE QUEL JEU sur Switch en 2026!"/></a>
+  <a href="https://www.youtube.com/@melv1l">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="assets/youtube-button-dark.svg"/>
+      <source media="(prefers-color-scheme: light)" srcset="assets/youtube-button-light.svg"/>
+      <img src="assets/youtube-button-light.svg" height="60" alt="Visit my YouTube channel"/>
+    </picture>
+  </a>
 </p>
-<!-- YOUTUBE:END -->
 
 <br/>
 
 <h3 align="center">Code. Built hands-on. 💻</h3>
 
-| | | |
-|:-:|---|---|
-| 🐰 | [**Bunny Bot**](https://github.com/meelvil/bunny-bot) | Discord bot for the Nintendo modding community: console guides, OCR error lookup, Switch serial checker |
-| 🧩 | [**CommandsHelper**](https://github.com/meelvil/generateur-commandes) | Electron app to build discord.js commands visually, with a live Discord-style preview |
-| 📦 | [**Fortnite ChestCounter**](https://github.com/LED-N/Fortnite-ChestCounter) | Contributor: 6 new in-game overlay styles |
-| 🎓 | **42 Lyon** | C from the ground up: `libft`, `ft_printf`, and more |
+<p align="center">
+  🐰 <a href="https://github.com/meelvil/bunny-bot"><b>Bunny Bot</b></a><br/>
+  <sub>Discord bot for the Nintendo modding community: console guides, OCR error lookup, Switch serial checker.</sub>
+</p>
+<p align="center">
+  🧩 <a href="https://github.com/meelvil/generateur-commandes"><b>CommandsHelper</b></a><br/>
+  <sub>Electron app to build discord.js commands visually, with a live Discord-style preview.</sub>
+</p>
+<p align="center">
+  📦 <a href="https://github.com/LED-N/Fortnite-ChestCounter"><b>Fortnite ChestCounter</b></a><br/>
+  <sub>Contributor: 6 new in-game overlay styles.</sub>
+</p>
+<p align="center">
+  🎓 <b>42 Lyon</b><br/>
+  <sub>C from the ground up: <code>libft</code>, <code>ft_printf</code>, and more.</sub>
+</p>
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=c,js,nodejs,py,electron,discord,linux,git,vscode&theme=dark"/>
-    <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=c,js,nodejs,py,electron,discord,linux,git,vscode&theme=light"/>
-    <img src="https://skillicons.dev/icons?i=c,js,nodejs,py,electron,discord,linux,git,vscode&theme=light" alt="C, JavaScript, Node.js, Python, Electron, Discord, Linux, Git, VS Code"/>
+    <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=c%2Cjs%2Cnodejs%2Cpy%2Celectron%2Cdiscord%2Clinux%2Cgit%2Cvscode&theme=dark"/>
+    <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=c%2Cjs%2Cnodejs%2Cpy%2Celectron%2Cdiscord%2Clinux%2Cgit%2Cvscode&theme=light"/>
+    <img src="https://skillicons.dev/icons?i=c%2Cjs%2Cnodejs%2Cpy%2Celectron%2Cdiscord%2Clinux%2Cgit%2Cvscode&theme=light" alt="C, JavaScript, Node.js, Python, Electron, Discord, Linux, Git, VS Code"/>
   </picture>
 </p>
 

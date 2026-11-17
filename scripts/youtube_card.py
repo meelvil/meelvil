@@ -8,8 +8,8 @@ What it does (run by .github/workflows/youtube.yml every few hours):
      (transparent background, one version per GitHub theme),
      with the thumbnail embedded in base64 (an SVG shown through <img>
      on GitHub is not allowed to load external images, so we inline it).
-  3. Rewrites the block between <!-- YOUTUBE:START --> and <!-- YOUTUBE:END -->
-     in README.md with clickable thumbnails of the latest videos.
+  3. In README.md, points the card's link to the newest video and adds
+     ?v=<video id> to the card images so GitHub's image cache refreshes.
 
 Only the Python standard library is used, so the workflow needs no pip install.
 
@@ -33,7 +33,6 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 ASSETS = ROOT / "assets"  # writes youtube-latest-dark.svg + youtube-latest-light.svg
 README_PATH = ROOT / "README.md"
-VIDEOS_IN_README = 3
 
 NS = {
     "atom": "http://www.w3.org/2005/Atom",
@@ -123,15 +122,15 @@ EASE = "cubic-bezier(.25,.1,.25,1)"
 def render_card(video: dict, thumb: str | None, now: dt.datetime, theme: str) -> str:
     t = THEMES[theme]
     W, H = 900, 240
-    TX, TY, TW, TH = 20, 20, 356, 200
+    TX, TY, TW, TH = 22, 20, 356, 200
     CX, CY = TX + TW / 2, TY + TH / 2
     is_new = (now - video["published"]).days < 7
     title_lines = wrap(video["title"], 29, 2)  # ~14px per char at 26px bold, 460px available
     views = human_views(video["views"])
     meta = video["published"].strftime("%d %b %Y") + (f"  ·  {views}" if views else "")
 
-    if thumb:
-        picture = f'<image href="{thumb}" x="{TX}" y="{TY}" width="{TW}" height="{TH}" preserveAspectRatio="xMidYMid slice" clip-path="url(#thumb)"/>'
+    if thumb:  # drawn 2px bigger on each side to hide the black edge some thumbnails have
+        picture = f'<image href="{thumb}" x="{TX - 2}" y="{TY - 2}" width="{TW + 4}" height="{TH + 4}" preserveAspectRatio="xMidYMid slice" clip-path="url(#thumb)"/>'
     else:
         picture = f'<rect x="{TX}" y="{TY}" width="{TW}" height="{TH}" fill="url(#ph)" clip-path="url(#thumb)"/>'
     title_svg = "".join(
@@ -149,6 +148,8 @@ def render_card(video: dict, thumb: str | None, now: dt.datetime, theme: str) ->
   <title>Latest upload — {escape(video["title"])}</title>
   <defs>
     <linearGradient id="ph" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0A84FF"/><stop offset=".5" stop-color="#BF5AF2"/><stop offset="1" stop-color="#FF375F"/></linearGradient>
+    <linearGradient id="ring" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0A84FF"/><stop offset=".5" stop-color="#BF5AF2"/><stop offset="1" stop-color="#FF375F"/>
+      <animateTransform attributeName="gradientTransform" type="rotate" values="0 .5 .5;360 .5 .5" dur="8s" repeatCount="indefinite"/></linearGradient>
     <clipPath id="thumb"><rect x="{TX}" y="{TY}" width="{TW}" height="{TH}" rx="16"/></clipPath>
     <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#000" flood-opacity=".25"/></filter>
   </defs>
@@ -161,6 +162,7 @@ def render_card(video: dict, thumb: str | None, now: dt.datetime, theme: str) ->
   </style>
 
   <g filter="url(#shadow)"><rect x="{TX}" y="{TY}" width="{TW}" height="{TH}" rx="16" fill="#000" fill-opacity=".001"/>{picture}</g>
+  <rect x="{TX - 1.5}" y="{TY - 1.5}" width="{TW + 3}" height="{TH + 3}" rx="17.5" fill="none" stroke="url(#ring)" stroke-width="3"/>
   <rect x="{TX}" y="{TY + TH - 4}" width="{TW}" height="4" fill="#fff" fill-opacity=".3" clip-path="url(#thumb)"/>
   <rect x="{TX}" y="{TY + TH - 4}" width="0" height="4" fill="{t["red"]}" clip-path="url(#thumb)">
     <animate attributeName="width" values="0;{TW}" dur="7s" repeatCount="indefinite"/>
@@ -179,33 +181,24 @@ def render_card(video: dict, thumb: str | None, now: dt.datetime, theme: str) ->
 '''
 
 
-def render_readme_block(videos: list[dict]) -> str:
-    cells = []
-    for v in videos[:VIDEOS_IN_README]:
-        url = f"https://www.youtube.com/watch?v={v['id']}"
-        title = escape(v["title"], quote=True)
-        cells.append(
-            f'  <a href="{url}" title="{title}">'
-            f'<img src="https://i.ytimg.com/vi/{v["id"]}/mqdefault.jpg" width="260" alt="{title}"/></a>'
-        )
-    return '<p align="center">\n' + "\n".join(cells) + "\n</p>"
+def update_readme(latest: dict) -> bool:
+    """Point the card's link at the newest video and bump ?v= on the card images.
 
-
-def update_readme(latest: dict, block: str) -> bool:
+    GitHub (camo) and browsers cache README images hard: without a new URL the
+    old card can stay on screen for hours, so the video id doubles as a cache-buster.
+    """
     text = README_PATH.read_text(encoding="utf-8")
-    new = re.sub(
-        r"(<!-- YOUTUBE:START -->).*?(<!-- YOUTUBE:END -->)",
-        lambda m: f"{m.group(1)}\n{block}\n{m.group(2)}",
-        text,
-        flags=re.S,
-    )
-    # the animated card is wrapped in a link that must always point to the newest video
     new = re.sub(
         r'(<!-- YOUTUBE:LATEST -->.*?<a href=")[^"]*(")',
         lambda m: f"{m.group(1)}https://www.youtube.com/watch?v={latest['id']}{m.group(2)}",
-        new,
+        text,
         count=1,
         flags=re.S,
+    )
+    new = re.sub(
+        r"(youtube-latest-(?:dark|light)\.svg)(?:\?v=[\w-]*)?",
+        lambda m: f"{m.group(1)}?v={latest['id']}",
+        new,
     )
     if new != text:
         README_PATH.write_text(new, encoding="utf-8")
@@ -239,7 +232,7 @@ def main() -> int:
     ASSETS.mkdir(parents=True, exist_ok=True)
     for theme in THEMES:
         (ASSETS / f"youtube-latest-{theme}.svg").write_text(render_card(latest, thumb, now, theme), encoding="utf-8")
-    changed = update_readme(latest, render_readme_block(videos))
+    changed = update_readme(latest)
     print(f"card updated for '{latest['title']}' · README {'updated' if changed else 'unchanged'}")
     return 0
 
