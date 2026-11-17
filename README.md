@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="https://www.youtube.com/@YOUR_HANDLE"><b>YouTube</b></a> ↗ &nbsp;·&nbsp;
+  <a href="https://www.youtube.com/@melv1l"><b>YouTube</b></a> ↗ &nbsp;·&nbsp;
   <a href="https://github.com/meelvil/bunny-bot"><b>Bunny Bot</b></a> ↗ &nbsp;·&nbsp;
   <a href="https://github.com/meelvil/generateur-commandes"><b>CommandsHelper</b></a> ↗ &nbsp;·&nbsp;
   <b>42 Lyon</b>
@@ -45,7 +45,7 @@
 
 <!-- YOUTUBE:LATEST -->
 <p align="center">
-  <a href="https://www.youtube.com/@YOUR_HANDLE">
+  <a href="https://www.youtube.com/@melv1l">
     <picture>
       <source media="(prefers-color-scheme: dark)" srcset="assets/youtube-latest-dark.svg"/>
       <source media="(prefers-color-scheme: light)" srcset="assets/youtube-latest-light.svg"/>
