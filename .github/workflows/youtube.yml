@@ -1,0 +1,30 @@
+name: Update YouTube latest
+
+on:
+  schedule:
+    - cron: "0 */3 * * *"   # every 3 hours
+  workflow_dispatch:         # manual run from the Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Refresh latest video card + thumbnails
+        env:
+          YT_CHANNEL_ID: ${{ vars.YT_CHANNEL_ID }}
+        run: python3 scripts/youtube_card.py
+
+      - name: Commit changes
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add README.md assets/youtube-latest-*.svg
+            git commit -m "chore: update latest YouTube video"
+            git push
+          fi
